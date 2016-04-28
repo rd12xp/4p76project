@@ -49,13 +49,13 @@ public class NeuralNetwork {
                 double ranWeight;
                 boolean neg;
                 ranWeight = (double)random.nextFloat();
-                neg = random.nextBoolean();
+                //neg = random.nextBoolean();
                 if(ranWeight==0){// dont let it be 0
                     ranWeight = (double)random.nextFloat();
                 }
-                if(neg){
-                    ranWeight = -(ranWeight);
-                }
+                //if(neg){
+                 //   ranWeight = -(ranWeight);
+                //}
                 
                 networkWeights[x][y] = ranWeight;
 
@@ -85,8 +85,8 @@ public class NeuralNetwork {
                 winner = i;
             }
         }
-        int winnerx = (int)(winner/100);
-        int winnery =(winner-winnerx*100);
+        int winnerx = (int)(winner/40);
+        int winnery =(winner-winnerx*40);
         System.out.println("the winning node is: " + winnerx +", " + winnery);
         //calculate neighbourhood---------------------------
         
@@ -138,12 +138,12 @@ public class NeuralNetwork {
         int y, winY;
         
         //get location
-        x = (int)(i/100);
-        y = i - x*100;
+        x = (int)(i/40);
+        y = i - x*40;
         
         // get the winners location
-        winX = (int)(win/100);
-        winY = win - winX*100;
+        winX = (int)(win/40);
+        winY = win - winX*40;
         
         return Math.sqrt(Math.pow((x-winX),2) + Math.pow((y-winY),2));
     }

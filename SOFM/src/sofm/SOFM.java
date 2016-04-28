@@ -15,6 +15,10 @@ import java.io.InputStreamReader;
 import java.util.zip.GZIPInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.awt.*;
+import java.util.*;
+import javax.swing.*;
+import java.awt.*;
 /**
  *
  * @author randy
@@ -51,11 +55,11 @@ public class SOFM {
         double[] input = new double[9];
         double[] inputIris = new double[4];
         
-        NeuralNetwork parityNetwork = new NeuralNetwork(10003, 3, 10000);
+        NeuralNetwork parityNetwork = new NeuralNetwork(1603, 3, 1600);
 
         Random random = new Random(seed);
         
-        for (int a = 0; a < 26; a++) { 
+        for (int a = 0; a < 400; a++) { 
         //shuffle them
         int index;
         double[] temp;
@@ -75,7 +79,7 @@ public class SOFM {
                 for (int i = 0; i < 3; i++) {
                     input[i] = colours[n][i];//get input
                 }
-                if (parityNetwork.trainingExample(input, 0.1, 390, count)) {
+                if (parityNetwork.trainingExample(input, 0.1, 6000, count)) {
                     correct++;
                 } // entering training data
                 count++;
@@ -110,9 +114,27 @@ public class SOFM {
             for (int i = 0; i < 3; i++) {
                 input[i] = coloursTest[n][i];//get input
             }
-            parityNetwork.trainingExample(input, 0.1, 390, count);
+            //parityNetwork.trainingExample(input, 0.1, 390, count);
             System.out.println("here");
         }
+        JFrame frame = new JFrame("Display");
+        frame.setLayout(new FlowLayout());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(630, 640);
+        
+        JPanel display = new JPanel(new GridLayout(40,40));
+        JPanel insideSquare;
+        Color c1;
+
+        for(int i=0; i<1600; i++){
+            c1 = new Color((int)(parityNetwork.networkWeights[0][i]*255),(int)(parityNetwork.networkWeights[1][i]*255),(int)(parityNetwork.networkWeights[2][i]*255));
+            insideSquare = new JPanel();
+            insideSquare.setBackground(c1);
+            display.add(insideSquare);
+            frame.add(insideSquare);
+            frame.setVisible(true);
+        }
+        
 
     }
     
