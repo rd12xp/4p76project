@@ -15,7 +15,7 @@ import java.util.Random;
  * @author randy
  */
 public class NeuralNetwork {
-    int seed = 9987;
+    int seed = 5152;
     double[][] networkWeights;
     double[][] weightChange,oldweightChange;
     double[][] deltaLearn;
@@ -117,9 +117,27 @@ public class NeuralNetwork {
         
         return correct;
     }
-    public boolean testingExample(double[] input, double learn, double momentum,double delta, String expected, double activation){
-       
-        return true;
+    public int testingExample(double[] input){
+       dist = new double[numOutput]; // distance between input and output nodes
+        inputNodes = new double[numInput];
+        //backpropNodes = new double[numHidden];
+        boolean correct=false; 
+        double error = 0;
+        
+        inputNodes = input;
+        
+        //calculating and finding winning node
+        double min =10000;
+        int winner=0;
+        
+        for(int i=0; i<numOutput; i++){
+            dist[i] = sum(i);
+            if(dist[i]<min){
+                min = dist[i];
+                winner = i;
+            }
+        }
+        return winner;
         
     }
     
